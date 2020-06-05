@@ -21,7 +21,8 @@ Partitionierungstool mit ```cfdisk``` starten
 
 #### 2.2 root
 
-```root``` wird die zweite Partition ```sda2```, direkt nach ```EFIBOOT```. Sie füllt den kompletten Rest des Datenträgers auf.
+```root``` wird die zweite Partition ```sda2```, direkt nach ```EFIBOOT```. Sie füllt den kompletten Rest des Datenträgers auf.  
+Anstelle einer Swap-Partition benutzen wir ein Swapfile (Konfiguration unter 7.3).  
 
 ## 3. Anlegen der Dateisysteme, Vergabe der Label und mounten der Partitionen am jeweiligen Aufhängpunkt
 
@@ -55,7 +56,7 @@ Bei Laptops mit WLAN
 ### 4.2 fstab erzeugen
 
 ```genfstab -Lp /mnt > /mnt/etc/fstab```  
-Datei öffnen um auf SSD Konfig zu wechslen  
+Datei öffnen um auf SSD Konfig zu wechseln  
 ```nano /mnt/etc/fstab```  
 ```LABEL=p_arch / ext4 rw,defaults,noatime,discard 0 1```  
 
@@ -66,7 +67,12 @@ chroot in die Betriebssystemumgebung
 DHCP aktivieren  
 ```systemctl enable dhcpcd```  
 Rechnername festlegen  
-```echo Rechnername > /etc/hostname```  
+```echo ArchLinux > /etc/hostname```  
+Hosts Datei anpassen  
+```nano /etc/hosts```  
+```127.0.0.1 localhost```  
+```::1 localhost```  
+```127.0.1.1 ArchLinux.home ArchLinux```  
 Spracheinstellungen auf Deutsch festlegen  
 ```nano /etc/locale.gen```  
 Kommentarzeichen ```#``` entfernen  
@@ -111,7 +117,19 @@ Sudoers Datbei editieren
 Kommentarzeichen ```#``` vor der Zeile  
 ```%wheel ALL=(ALL) ALL``` entfernen
 
-### 7.3 Sonstiges
+### 7.3 Swap-File anlegen
+
+Ich lege ein Swapfile mit ```1GB``` Größe an.  
+```fallocate -l 1G /swapfile```  
+File mit Nullen überschreiben.  
+```dd if=/dev/zero of=/swapfile bs=1024 count=1048576```  
+Rechte ändern.  
+```chmod 600 /swapfile```  
+Swap aktivieren.  
+```mkswap /swapfile```  
+```swapon /swapfile```  
+
+### 7.4 Sonstiges
 
 Automatische Zeiteinstellung aktivieren  
 ```systemctl enable --now systemd-timesyncd.service```  
