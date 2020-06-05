@@ -43,10 +43,10 @@ Partitionierungstool mit ```cfdisk``` starten
 
 ### 4.1 Das Basissystem installieren
 
-```nano /etc/pacman.d/mirrorlist``` die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist.
-```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh xterm nano vim man tlp acpid dbus avahi grub efibootmgr```
-Bei Laptops mit WLAN
-```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh xterm nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog```
+```nano /etc/pacman.d/mirrorlist``` die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist.  
+```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh xterm nano vim man tlp acpid dbus avahi grub efibootmgr```  
+Bei Laptops mit WLAN  
+```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh xterm nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog```  
 
 ### 4.2 fstab erzeugen
 
@@ -58,29 +58,29 @@ Datei öffnen um auf SSD Konfig zu wechslen
 
 ## 5. Systemkonfiguration
 
-chroot in die Betriebssystemumgebung
-```arch-chroot /mnt/```
-DHCP aktivieren
-```systemctl enable dhcpcd```
-Rechnername festlegen
-```echo Rechnername > /etc/hostname```
-Spracheinstellungen auf Deutsch festlegen
-```nano /etc/locale.gen```
-Kommentarzeichen ```#``` entfernen
-```de_DE.UTF-8 UTF-8```
-```de_DE ISO-8859-1```
-```de_DE@euro ISO-8859-15```
-```en_US.UFT-8 UTF-8```
-Locale generieren
-```locale-gen```
-Die Tastaturbelegung und Schriftart festlegen
-```echo KEYMAP=de-latin1 > /etc/vconsole.conf```
-```echo FONT=lat9w-16 >> /etc/vconsole.conf```
-Die Zeitzone festlegen
-```ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime```
-Initramfs erzeugen
-```mkinitcpio -p linux```
-Root Passwort festlegen
+chroot in die Betriebssystemumgebung  
+```arch-chroot /mnt/```  
+DHCP aktivieren  
+```systemctl enable dhcpcd```  
+Rechnername festlegen  
+```echo Rechnername > /etc/hostname```  
+Spracheinstellungen auf Deutsch festlegen  
+```nano /etc/locale.gen```  
+Kommentarzeichen ```#``` entfernen  
+```de_DE.UTF-8 UTF-8```  
+```de_DE ISO-8859-1```  
+```de_DE@euro ISO-8859-15```  
+```en_US.UFT-8 UTF-8```  
+Locale generieren  
+```locale-gen```  
+Die Tastaturbelegung und Schriftart festlegen  
+```echo KEYMAP=de-latin1 > /etc/vconsole.conf```  
+```echo FONT=lat9w-16 >> /etc/vconsole.conf```  
+Die Zeitzone festlegen  
+```ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime```  
+Initramfs erzeugen  
+```mkinitcpio -p linux```  
+Root Passwort festlegen  
 ```passwd```
 
 ## 6. Bootloader installieren
@@ -110,9 +110,11 @@ Kommentarzeichen ```#``` vor der Zeile
 
 ### 7.3 Sonstiges
 
-Automatische Zeiteinstellung aktivieren
-```systemctl enable --now systemd-timesyncd.service``
-TLP aktivieren
-```tlp start && systemctl enable tlp```
+Automatische Zeiteinstellung aktivieren  
+```systemctl enable --now systemd-timesyncd.service```  
+TLP aktivieren  
+```tlp start```  
+Dienst TLP automatisch starten lassen  
+```systemctl enable tlp```  
 
-Abschließend mit der Installation der gewünschenten DE/WM fortfahren. 
+Abschließend mit der Installation der gewünschenten DE/WM fortfahren.
