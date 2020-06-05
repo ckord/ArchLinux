@@ -7,12 +7,12 @@ Mit ```passwd``` das Passwort für root setzen und mit ```systemctl start sshd``
 
 ## 2. Partitionierung des Datenträgers und Formatierung der Partitionen
 
-Deutsches Tastaturlayout laden
-```loadkeys de```
-Datenträger abfragen
-```lsblk```
-Im folgenden Beispiel ist der zu verwendende Datenträger ```sda```
-Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir benötigen zwei Partitionen: ```EFIBOOT``` und ```root```.
+Deutsches Tastaturlayout laden  
+```loadkeys de```  
+Datenträger abfragen  
+```lsblk```  
+Im folgenden Beispiel ist der zu verwendende Datenträger ```sda```  
+Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir benötigen zwei Partitionen: ```EFIBOOT``` und ```root```.  
 Partitionierungstool mit ```cfdisk``` starten
 
 ### 2.1 EFIBOOT
@@ -35,26 +35,29 @@ Partitionierungstool mit ```cfdisk``` starten
 
 ### 1.4 Partitionen einhängen, boot Ordner erstellen
 
-```mount -L p_arch /mnt```
-```mkdir -p /mnt/boot```
-```mount -L EFIBOOT /mnt/boot```
+```mount -L p_arch /mnt```  
+```mkdir -p /mnt/boot```  
+```mount -L EFIBOOT /mnt/boot```  
 
 ## 4. Betriebssystem installieren
 
 ### 4.1 Das Basissystem installieren
 
-```nano /etc/pacman.d/mirrorlist``` die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist.  
+```nano /etc/pacman.d/mirrorlist```  
+Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist.  
+
+Pacstrap durchführen  
 ```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh xterm nano vim man tlp acpid dbus avahi grub efibootmgr```  
+
 Bei Laptops mit WLAN  
 ```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh xterm nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog```  
 
 ### 4.2 fstab erzeugen
 
-```genfstab -Lp /mnt > /mnt/etc/fstab```
-Datei öffnen um auf SSD Konfig zu wechslen
-```nano /mnt/etc/fstab```
+```genfstab -Lp /mnt > /mnt/etc/fstab```  
+Datei öffnen um auf SSD Konfig zu wechslen  
+```nano /mnt/etc/fstab```  
 ```LABEL=p_arch / ext4 rw,defaults,noatime,discard 0 1```  
-```LABEL=p_swap none swap defaults,noatime,discard 0 0```
 
 ## 5. Systemkonfiguration
 
@@ -96,16 +99,16 @@ Konfiguration erzeugen
 
 ### 7.1 Benutzer anlegen
 
-Benutzer anlegen, Passwort erstellen und zu Gruppen hinzufügen
-```useradd -m -g users -s /bin/zsh christoph```
-```passwd christoph```
-```usermod -aG christoph audio,video,power,wheel```
+Benutzer anlegen, Passwort erstellen und zu Gruppen hinzufügen  
+```useradd -m -g users -s /bin/zsh christoph```  
+```passwd christoph```  
+```usermod -aG christoph audio,video,power,wheel```  
 
 ### 7.2 Benutzer zur Gruppe Sudo hinzufügen
 
-Sudoers Datbei editieren
-```nano /etc/sudoers```
-Kommentarzeichen ```#``` vor der Zeile
+Sudoers Datbei editieren  
+```nano /etc/sudoers```  
+Kommentarzeichen ```#``` vor der Zeile  
 ```%wheel ALL=(ALL) ALL``` entfernen
 
 ### 7.3 Sonstiges
