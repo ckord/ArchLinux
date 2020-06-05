@@ -34,7 +34,7 @@ Anstelle einer Swap-Partition benutzen wir ein Swapfile (Konfiguration unter 7.3
 
 ```mkfs.ext4 -L p_arch /dev/sda2```
 
-### 1.4 Partitionen einhängen, boot Ordner erstellen
+### 3.3 Partitionen einhängen, boot Ordner erstellen
 
 ```mount -L p_arch /mnt```  
 ```mkdir -p /mnt/boot```  
