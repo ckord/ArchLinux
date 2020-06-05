@@ -19,7 +19,7 @@ Partitionierungstool mit ```cfdisk``` starten
 
 ```EFIBOOT``` wird die erste Partition ```sda1``` am Anfang des Datenträgers ```sda```. Ich setze die Größe auf ```1GB```.
 
-#### 2.2 root
+### 2.2 root
 
 ```root``` wird die zweite Partition ```sda2```, direkt nach ```EFIBOOT```. Sie füllt den kompletten Rest des Datenträgers auf.  
 Anstelle einer Swap-Partition benutzen wir ein Swapfile (Konfiguration unter 7.3).  
