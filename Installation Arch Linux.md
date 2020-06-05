@@ -88,12 +88,12 @@ Root Passwort festlegen
 
 ## 6. Bootloader installieren
 
-Installation von grub
-```pacman -S grub efibootmgr```
-EFI-Booteintrag installieren und einrichten
-```grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux```
-Konfiguration erzeugen
-```grub-mkconfig -o /boot/grub/grub.cfg```
+Installation von grub  
+```pacman -S grub efibootmgr```  
+EFI-Booteintrag installieren und einrichten  
+```grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux```  
+Konfiguration erzeugen  
+```grub-mkconfig -o /boot/grub/grub.cfg```  
 
 ## 7. Konfiguration & Benutzeranlage
 
