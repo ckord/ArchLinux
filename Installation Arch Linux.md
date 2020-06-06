@@ -48,10 +48,10 @@ Anstelle einer Swap-Partition benutzen wir ein Swapfile (Konfiguration unter 7.3
 Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist.  
 
 Pacstrap durchführen  
-```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh xterm nano vim man tlp acpid dbus avahi grub efibootmgr```  
+```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr```  
 
 Bei Laptops mit WLAN  
-```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh xterm nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog```  
+```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog```  
 
 ### 4.2 fstab erzeugen
 
