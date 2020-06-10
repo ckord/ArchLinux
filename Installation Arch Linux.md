@@ -2,22 +2,22 @@
 
 ## Inhaltsverzeichnis
 
-* [1. Vorbereitungen](#Vorbereitungen)
-2. [Partitionierung](#Partitionierung)  
-2.1 [EFIBOOT](#EFIBOOT)  
-2.2 [root](#root)  
-3. [Dateisysteme](#Dateisysteme)  
-3.1 [EFIBOOT](#EFIBOOT)  
-3.2 [root](#root)
-4. [Betriebssysteminstallation](#Betriebssysteminstallation)  
-4.1 [pacstrap](#pacstrap)  
-4.2 [fstab](#fstab)  
-5. [Systemkonfiguration](#Systemkonfiguration)
-6. [Bootloader](#Bootloader)
-7. [Benutzer](#Benutzer)  
-7.1 [Benutzeranlage](#Benutzeranlage)  
-7.2 [sudo](#sudo)  
-8. [Sonstiges](#Sonstiges)
+* [Vorbereitungen](#Vorbereitungen)
+* [Partitionierung](#Partitionierung)  
+    * [EFIBOOT](#EFIBOOT)  
+    * [root](#root)  
+* [Dateisysteme](#Dateisysteme)  
+    * [EFIBOOT](#EFIBOOT)  
+    * [root](#root)
+* [Betriebssysteminstallation](#Betriebssysteminstallation)  
+    * [pacstrap](#pacstrap)  
+    * [fstab](#fstab)  
+* [Systemkonfiguration](#Systemkonfiguration)
+* [Bootloader](#Bootloader)
+* [Benutzer](#Benutzer)  
+    * [Benutzeranlage](#Benutzeranlage)  
+    * [sudo](#sudo)  
+* [Sonstiges](#Sonstiges)
 
 ## 1. Vorbereitungen
 
@@ -151,7 +151,7 @@ Benutzer anlegen, Passwort erstellen und zu Gruppen hinzufügen
 
 ### 7.2 Benutzer zur Gruppe Sudo hinzufügen
 
-Sudoers Datbei editieren  
+Sudoers Datei editieren  
 ```nano /etc/sudoers```  
 Kommentarzeichen ```#``` vor der Zeile  
 ```%wheel ALL=(ALL) ALL``` entfernen
