@@ -19,45 +19,45 @@
     * [sudo](#sudo)  
 * [Sonstiges](#Sonstiges)
 
-## 1. Vorbereitungen
+## Vorbereitungen
 
 LAN Kabel einstecken und Start des Installationsmediums im UEFI Modus.
 Mit ```passwd``` das Passwort für root setzen und mit ```systemctl start sshd``` den SSH-Server starten. Mit ```ip a``` die IP-Adresse abfragen, sollte keine IP-Adresse vorhanden sein mit ```dhcpcd``` eine Adresse vom DHCP-Server beziehen. Anschließend die Verbindung mit ```ssh root@IP-Adresse``` die herstellen. Deutsches Tastaturlayout mit ```loadkeys de``` laden.  
 
-## 2. Partitionierung
+## Partitionierung
 
 Datenträger abfragen  
 ```lsblk```  
 Im folgenden Beispiel ist der zu verwendende Datenträger ```sda```  
-Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir benötigen zwei Partitionen: ```EFIBOOT``` und ```root```. Anstelle einer Swap-Partition benutzen wir ein Swapfile (Konfiguration unter 5.)  Partitionierungstool mit ```cfdisk``` starten
+Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir benötigen zwei Partitionen: ```EFIBOOT``` und ```root```. Anstelle einer Swap-Partition benutzen wir ein Swapfile (Konfiguration unter [Systemkonfiguration](#Systemkonfiguration))  Partitionierungstool mit ```cfdisk``` starten
 
-### 2.1 EFIBOOT
+### EFIBOOT
 
 ```EFIBOOT``` wird die erste Partition ```sda1``` am Anfang des Datenträgers ```sda```. Ich setze die Größe auf ```1GB```.
 
-### 2.2 root
+### root
 
 ```root``` wird die zweite Partition ```sda2```, direkt nach ```EFIBOOT```. Sie füllt den kompletten Rest des Datenträgers auf.  
 
-## 3. Dateisysteme
+## Dateisysteme
 
-### 3.1 EFIBOOT
+### EFIBOOT
 
 ```mkfs.fat -F 32 -n EFIBOOT /dev/sda1```
 
-### 3.2 root
+### root
 
 ```mkfs.ext4 -L p_arch /dev/sda2```
 
-### 3.3 Partitionen einhängen, boot Ordner erstellen
+### Partitionen einhängen, boot Ordner erstellen
 
 ```mount -L p_arch /mnt```  
 ```mkdir -p /mnt/boot```  
 ```mount -L EFIBOOT /mnt/boot```  
 
-## 4. Betriebssystem
+## Betriebssystem
 
-### 4.1 pacstrap
+### pacstrap
 
 ```nano /etc/pacman.d/mirrorlist```  
 Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist.  
@@ -68,7 +68,7 @@ Pacstrap durchführen
 Bei Laptops mit WLAN  
 ```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog```  
 
-### 4.2 fstab erzeugen
+### fstab erzeugen
 
 ```genfstab -Lp /mnt > /mnt/etc/fstab```  
 Datei öffnen um auf SSD Konfig zu wechseln  
@@ -76,7 +76,7 @@ Datei öffnen um auf SSD Konfig zu wechseln
 ```nano /mnt/etc/fstab```  
 ```LABEL=p_arch / ext4 rw,defaults,noatime,discard 0 1```  
 
-## 5. Systemkonfiguration
+## Systemkonfiguration
 
 chroot in die Betriebssystemumgebung  
 ```arch-chroot /mnt/```  
@@ -131,7 +131,7 @@ Swap aktivieren.
 ```mkswap /swapfile```  
 ```swapon /swapfile```
 
-## 6. Bootloader installieren
+## Bootloader installieren
 
 Installation von grub  
 ```pacman -S grub efibootmgr```  
@@ -140,23 +140,23 @@ EFI-Booteintrag installieren und einrichten
 Konfiguration erzeugen  
 ```grub-mkconfig -o /boot/grub/grub.cfg```  
 
-## 7. Benutzeranlage
+## Benutzeranlage
 
-### 7.1 Benutzer anlegen
+### Benutzer anlegen
 
 Benutzer anlegen, Passwort erstellen und zu Gruppen hinzufügen  
 ```useradd -m -g users -s /bin/zsh christoph```  
 ```passwd christoph```  
 ```usermod -aG christoph audio,video,power,wheel```  
 
-### 7.2 Benutzer zur Gruppe Sudo hinzufügen
+### Benutzer zur Gruppe Sudo hinzufügen
 
 Sudoers Datei editieren  
 ```nano /etc/sudoers```  
 Kommentarzeichen ```#``` vor der Zeile  
 ```%wheel ALL=(ALL) ALL``` entfernen
 
-## 8. Sonstiges
+## Sonstiges
 
 Automatische Zeiteinstellung aktivieren  
 ```systemctl enable --now systemd-timesyncd.service```  
