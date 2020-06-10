@@ -2,7 +2,7 @@
 
 ## Inhaltsverzeichnis
 
-* [Vorbereitungen](#Vorbereitungen)
+* [1. Vorbereitungen](#Vorbereitungen)
 2. [Partitionierung](#Partitionierung)  
 2.1 [EFIBOOT](#EFIBOOT)  
 2.2 [root](#root)  
@@ -19,7 +19,7 @@
 7.2 [sudo](#sudo)  
 8. [Sonstiges](#Sonstiges)
 
-## Vorbereitungen
+## 1. Vorbereitungen
 
 LAN Kabel einstecken und Start des Installationsmediums im UEFI Modus.
 Mit ```passwd``` das Passwort für root setzen und mit ```systemctl start sshd``` den SSH-Server starten. Mit ```ip a``` die IP-Adresse abfragen, sollte keine IP-Adresse vorhanden sein mit ```dhcpcd``` eine Adresse vom DHCP-Server beziehen. Anschließend die Verbindung mit ```ssh root@IP-Adresse``` die herstellen. Deutsches Tastaturlayout mit ```loadkeys de``` laden.  
