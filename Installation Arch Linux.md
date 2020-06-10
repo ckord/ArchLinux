@@ -2,7 +2,7 @@
 
 ## Inhaltsverzeichnis
 
-1. [Vorbereitungen](#Vorbereitungen)
+1. [Vorbereitungen](#1.-Vorbereitungen)
 2. [Partitionierung](#Partitionierung)  
 2.1 [EFIBOOT](#EFIBOOT)  
 2.2 [root](#root)  
