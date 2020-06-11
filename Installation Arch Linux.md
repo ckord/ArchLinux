@@ -9,7 +9,7 @@
 * [Dateisysteme](#Dateisysteme)  
     * [EFIBOOT](#EFIBOOT)  
     * [root](#root)
-* [Betriebssysteminstallation](#Betriebssysteminstallation)  
+* [Installation des Betriebssystems](#Installation-des-Betriebssystems)  
     * [pacstrap](#pacstrap)  
     * [fstab](#fstab)  
 * [Systemkonfiguration](#Systemkonfiguration)
@@ -55,7 +55,7 @@ Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir b
 ```mkdir -p /mnt/boot```  
 ```mount -L EFIBOOT /mnt/boot```  
 
-## Betriebssystem
+## Installation des Betriebssystems
 
 ### pacstrap
 
