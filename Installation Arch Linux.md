@@ -15,8 +15,8 @@
 * [Systemkonfiguration](#Systemkonfiguration)
 * [Bootloader](#Bootloader)
 * [Benutzer](#Benutzer)  
-    * [Benutzeranlage](#Benutzeranlage)  
-    * [sudo](#sudo)  
+    * [Benutzer](#Benutzer)  
+    * [sudo](#Benutzer-zur-Gruppe-Sudo-hinzufügen)  
 * [Sonstiges](#Sonstiges)
 
 ## Vorbereitungen
@@ -68,7 +68,7 @@ Pacstrap durchführen
 Bei Laptops mit WLAN  
 ```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog```  
 
-### fstab erzeugen
+### fstab
 
 ```genfstab -Lp /mnt > /mnt/etc/fstab```  
 Datei öffnen um auf SSD Konfig zu wechseln  
@@ -131,7 +131,7 @@ Swap aktivieren.
 ```mkswap /swapfile```  
 ```swapon /swapfile```
 
-## Bootloader installieren
+## Bootloader
 
 Installation von grub  
 ```pacman -S grub efibootmgr```  
@@ -140,7 +140,7 @@ EFI-Booteintrag installieren und einrichten
 Konfiguration erzeugen  
 ```grub-mkconfig -o /boot/grub/grub.cfg```  
 
-## Benutzeranlage
+## Benutzer
 
 ### Benutzer anlegen
 
