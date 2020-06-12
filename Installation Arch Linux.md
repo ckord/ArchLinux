@@ -63,10 +63,10 @@ Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir b
 Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist.  
 
 Pacstrap durchführen  
-```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr```  
+```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr openssh```  
 
 Bei Laptops mit WLAN  
-```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog```  
+```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog openssh```  
 
 ### fstab
 
@@ -147,7 +147,7 @@ Konfiguration erzeugen
 Benutzer anlegen, Passwort erstellen und zu Gruppen hinzufügen  
 ```useradd -m -g users -s /bin/zsh christoph```  
 ```passwd christoph```  
-```usermod -aG christoph audio,video,power,wheel```  
+```usermod -aG audio,video,power,wheel christoph```  
 
 ### Benutzer zur Gruppe Sudo hinzufügen
 
@@ -159,11 +159,17 @@ Kommentarzeichen ```#``` vor der Zeile
 ## Sonstiges
 
 Automatische Zeiteinstellung aktivieren  
-```systemctl enable --now systemd-timesyncd.service```  
+```systemctl enable systemd-timesyncd.service```  
 
 TLP aktivieren  
 ```tlp start```  
 Dienst TLP automatisch starten lassen  
 ```systemctl enable tlp```  
 
-Abschließend mit der Installation der gewünschenten DE/WM fortfahren.
+## Neustart
+
+```chroot``` mit ```exit``` verlassen.  
+```umount -R /mnt```  
+```reboot```
+
+Abschließend mit der Installation der gewünschenten DE/WM [i3](https://github.com/ckord/ArchLinux/blob/master/i3.md) fortfahren.
