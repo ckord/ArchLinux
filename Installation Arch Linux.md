@@ -17,7 +17,6 @@
 * [Benutzer](#Benutzer)  
     * [Benutzer](#Benutzer)  
     * [sudo](#Benutzer-zur-Gruppe-Sudo-hinzufügen)  
-* [Sonstiges](#Sonstiges)
 
 ## Vorbereitungen
 
@@ -81,8 +80,9 @@ Datei öffnen um auf SSD Konfig zu wechseln
 chroot in die Betriebssystemumgebung  
 ```arch-chroot /mnt/```  
 
-DHCP aktivieren  
+DHCP aktivieren & SSH aktivieren  
 ```systemctl enable dhcpcd```  
+```systemctl enable sshd```  
 
 Rechnername festlegen  
 ```echo ArchLinux > /etc/hostname```  
@@ -112,21 +112,14 @@ Die Tastaturbelegung und Schriftart festlegen
 Die Zeitzone festlegen  
 ```ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime```  
 
+Automatische Zeiteinstellung aktivieren  
+```systemctl enable systemd-timesyncd.service```  
+
 Initramfs erzeugen  
 ```mkinitcpio -p linux```  
 
 Root Passwort festlegen  
 ```passwd```  
-
-Ich lege ein Swapfile mit ```1GB``` Größe an.  
-```dd if=/dev/zero of=/swapfile bs=1M count=1024 status=progress```  
-
-Rechte ändern.  
-```chmod 600 /swapfile```  
-
-Swap aktivieren.  
-```mkswap /swapfile```  
-```swapon /swapfile```
 
 ## Bootloader
 
@@ -152,16 +145,6 @@ Sudoers Datei editieren
 ```nano /etc/sudoers```  
 Kommentarzeichen ```#``` vor der Zeile  
 ```%wheel ALL=(ALL) ALL``` entfernen
-
-## Sonstiges
-
-Automatische Zeiteinstellung aktivieren  
-```systemctl enable systemd-timesyncd.service```  
-
-TLP aktivieren  
-```tlp start```  
-Dienst TLP automatisch starten lassen  
-```systemctl enable tlp```  
 
 ## Neustart
 
