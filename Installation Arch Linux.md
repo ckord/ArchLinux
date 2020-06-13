@@ -119,10 +119,7 @@ Root Passwort festlegen
 ```passwd```  
 
 Ich lege ein Swapfile mit ```1GB``` Größe an.  
-```fallocate -l 1G /swapfile```  
-
-File mit Nullen überschreiben.  
-```dd if=/dev/zero of=/swapfile bs=1024 count=1048576```  
+```dd if=/dev/zero of=/swapfile bs=1M count=1024 status=progress```  
 
 Rechte ändern.  
 ```chmod 600 /swapfile```  
