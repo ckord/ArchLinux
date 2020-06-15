@@ -62,10 +62,10 @@ Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir b
 Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist.  
 
 Pacstrap durchführen  
-```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr openssh```  
+```pacstrap /mnt base base-devel linux linux-firmware networkmanager intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr openssh```  
 
 Bei Laptops mit WLAN  
-```pacstrap /mnt base base-devel linux linux-firmware dhcpcd intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog openssh```  
+```pacstrap /mnt base base-devel linux linux-firmware networkmanager intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog openssh```  
 
 ### fstab
 
@@ -81,7 +81,7 @@ chroot in die Betriebssystemumgebung
 ```arch-chroot /mnt/```  
 
 DHCP aktivieren & SSH aktivieren  
-```systemctl enable dhcpcd```  
+```systemctl enable NetworkManager```  
 ```systemctl enable sshd```  
 
 Rechnername festlegen  
