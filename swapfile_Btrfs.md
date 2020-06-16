@@ -52,7 +52,7 @@ Bei Btrfs das Swapfile anlegen, das ```No_COW``` Attribut setzen und sicherstell
 ```sudo chattr +C /.swap/swapfile```  
 ```sudo btrfs property set /.swap/swapfile compression none```  
 
-Ich lege ein Swapfile mit ```3GB``` Größe an.  
+Ich lege ein Swapfile mit ```3GB``` Größe an  
 ```sudo dd if=/dev/zero of=/.swap/swapfile bs=1M count=3072 status=progress```  
 
 Rechte ändern.  
