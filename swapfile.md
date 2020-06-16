@@ -15,12 +15,16 @@
 
 ## Konfiguration
 
-Ich lege ein Swapfile mit ```3GB``` Größe an.  
+Ich lege ein Swapfile mit ```3GB``` Größe an  
 ```sudo dd if=/dev/zero of=/swapfile bs=1M count=3072 status=progress```  
 
-Rechte ändern.  
+Rechte ändern  
 ```sudo chmod 600 /swapfile```  
 
-Swap aktivieren.  
+Swap aktivieren  
 ```sudo mkswap /swapfile```  
 ```sudo swapon /swapfile```
+
+Editieren der fstab  
+```sudo nano /etc/fstab```  
+```/swapfile none swap defaults 0 0```

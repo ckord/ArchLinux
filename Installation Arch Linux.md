@@ -151,4 +151,6 @@ Kommentarzeichen ```#``` vor der Zeile
 ```umount -R /mnt```  
 ```reboot```
 
-Abschließend mit der Installation der gewünschenten DE/WM [i3](https://github.com/ckord/ArchLinux/blob/master/i3.md) fortfahren.
+Abschließend mit der Installation der gewünschenten DE/WM [i3](https://github.com/ckord/ArchLinux/blob/master/i3.md) fortfahren.  
+*Optional*
+Mit der Konfiguration eines [Swapfiles unter Btrfs](https://github.com/ckord/ArchLinux/blob/master/swapfile_Btrfs.md) fortfahren.

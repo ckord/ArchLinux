@@ -40,7 +40,10 @@ Subvolume für ```/``` erstellen
 Subvolume für ```home``` erstellen  
 ```btrfs subvolume create @home```  
 Subvolume für ```snapshots``` erstellen  
-```btrfs subvolume create @snapshots```
+```btrfs subvolume create @snapshots```  
+*Optional:*  
+*Subvolume für ```swap``` erstellen*  
+*```sudo btrfs subvolume create @swap```*  
 
 Subvolumes anzeigen lassen  
 ```btrfs subvolume list -p /mnt```  
@@ -54,11 +57,15 @@ Subvolume ```/``` mounten
 Ordner für die Mountpunkte ```boot```, ```home``` und ```snapshots``` erstellen
 ```mkdir -p /mnt/boot```  
 ```mkdir -p /mnt/home```
-```mkdir -p /mnt/.snapshots```
+```mkdir -p /mnt/.snapshots```  
+*Optional:*  
+```mkdir -p /mnt/.swap```
 
 Subvolumes ```home``` und ```snapshots``` mounten  
 ```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@home /dev/sda2 /mnt/home```  
 ```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@snapshots /dev/sda2 /mnt/.snapshots```  
+*Optional:*  
+```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@swap /dev/sda2 /.swap```  
 
 EFIBOOT mounten  
 ```mount /dev/sda1 /mnt/boot```
@@ -68,7 +75,7 @@ EFIBOOT mounten
 ### pacstrap
 
 ```nano /etc/pacman.d/mirrorlist```  
-Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist.  
+Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist  
 
 Pacstrap durchführen  
 ```pacstrap /mnt base base-devel linux linux-firmware networkmanager intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr openssh btrfs-progs```  
