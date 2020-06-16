@@ -2,7 +2,7 @@
 
 ## Swapfile unter Btrfs
 
-Swapfiles werden unter Btrfs mit einem Linux Kernel > 5.0 unterstützt, jedoch mit Einschränkungen. Das Swapfile darf nicht auf einem Subvolume liegen, das gesnapshoted wird. Aus diesem Grund erstelle ich ein eigenes Subvolume für das Swapfile. Für Hibernation wird weitere [Konfiguration](https://wiki.archlinux.org/index.php/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file_on_Btrfs) fällig. Da ich Hibernation jedoch nie benutze lasse ich diese aus.
+Swapfiles werden unter Btrfs mit einem Linux Kernel > 5.0 unterstützt, jedoch mit Einschränkungen. Das Swapfile darf nicht auf einem Subvolume liegen, das gesnapshotted wird. Aus diesem Grund erstelle ich ein eigenes Subvolume für das Swapfile. Für Hibernation wird weitere [Konfiguration](https://wiki.archlinux.org/index.php/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file_on_Btrfs) fällig. Da ich Hibernation jedoch nie benutze lasse ich diese aus.
 
 ## Swap size table
 
@@ -19,7 +19,7 @@ Swapfiles werden unter Btrfs mit einem Linux Kernel > 5.0 unterstützt, jedoch m
 
 ## Subvolume und Mountpunkt
 
-Das Subvolume für swap soll im Default-Subvolume erstellt werden. Dazu die Btrfs-Partition mounten und in den Mountpunkt wechseln
+Das Subvolume für swap soll im Default-Subvolume erstellt werden. Dazu die Btrfs-Partition mounten und in den Mountpunkt wechseln  
 ```sudo mount /dev/sda2 /mnt```  
 ```cd /mnt/```  
 
@@ -30,7 +30,7 @@ Mountpunkt verlassen und Partition unmounten
 ```cd ..```  
 ```sudo umount -R /mnt```  
 
-Ordner für die Mountpunkte ```swap```.  
+Ordner für den Mountpunkt ```swap``` erstellen  
 ```sudo mkdir /.swap```
 
 Subvolume ```swap``` mounten  
