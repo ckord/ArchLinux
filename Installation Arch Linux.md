@@ -28,7 +28,9 @@ Mit ```passwd``` das Passwort für root setzen und mit ```systemctl start sshd``
 Datenträger abfragen  
 ```lsblk```  
 Im folgenden Beispiel ist der zu verwendende Datenträger ```sda```  
-Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir benötigen zwei Partitionen: ```EFIBOOT``` und ```root```. Anstelle einer Swap-Partition benutzen wir ein Swapfile (Konfiguration unter [Systemkonfiguration](#Systemkonfiguration))  Partitionierungstool mit ```cfdisk``` starten
+Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir benötigen zwei Partitionen: ```EFIBOOT``` und ```root```. Anstelle einer Swap-Partition benutzen wir ein [Swapfile](https://github.com/ckord/ArchLinux/blob/master/swapfile.md).
+
+Partitionierungstool mit ```cfdisk``` starten
 
 ### EFIBOOT
 
@@ -59,13 +61,10 @@ Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir b
 ### pacstrap
 
 ```nano /etc/pacman.d/mirrorlist```  
-Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist.  
+Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist  
 
 Pacstrap durchführen  
 ```pacstrap /mnt base base-devel linux linux-firmware networkmanager intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr openssh```  
-
-Bei Laptops mit WLAN  
-```pacstrap /mnt base base-devel linux linux-firmware networkmanager intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr wpa_supplicant dialog openssh```  
 
 ### fstab
 
@@ -78,7 +77,7 @@ Datei öffnen um auf SSD Konfig zu wechseln
 ## Systemkonfiguration
 
 chroot in die Betriebssystemumgebung  
-```arch-chroot /mnt/```  
+```arch-chroot /mnt```  
 
 DHCP aktivieren & SSH aktivieren  
 ```systemctl enable NetworkManager```  
@@ -123,8 +122,6 @@ Root Passwort festlegen
 
 ## Bootloader
 
-Installation von grub  
-```pacman -S grub efibootmgr```  
 EFI-Booteintrag installieren und einrichten  
 ```grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux```  
 Konfiguration erzeugen  
