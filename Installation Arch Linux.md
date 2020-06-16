@@ -64,7 +64,7 @@ Partitionierungstool mit ```cfdisk``` starten
 Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist  
 
 Pacstrap durchführen  
-```pacstrap /mnt base base-devel linux linux-firmware networkmanager intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr openssh```  
+```pacstrap /mnt base base-devel linux linux-firmware networkmanager intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi openssh```  
 
 ### fstab
 
@@ -122,6 +122,8 @@ Root Passwort festlegen
 
 ## Bootloader
 
+Grub installieren  
+```pacman -S grub efibootmgr```  
 EFI-Booteintrag installieren und einrichten  
 ```grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux```  
 Konfiguration erzeugen  
