@@ -9,23 +9,23 @@ Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir b
 
 Partitionierungstool mit ```cfdisk``` starten
 
-### EFIBOOT
+### EFIBOOT Parition
 
 ```EFIBOOT``` wird die erste Partition ```sda1``` am Anfang des Datenträgers ```sda```. Ich setze die Größe auf ```1GB```.
 
-### Btrfs
+### Btrfs Partition
 
 ```Btrfs``` wird die zweite Partition ```sda2```, direkt nach ```EFIBOOT```. Sie füllt den kompletten Rest des Datenträgers auf.  
 
 ## Dateisysteme
 
-### EFIBOOT
+### EFIBOOT Dateisystem
 
 ```mkfs.fat -F 32 -n EFIBOOT /dev/sda1```
 
-### root
+### Btrfs Dateisystem
 
-```mkfs.btrfs -L p_arch /dev/sda2```
+```mkfs.btrfs -L Btrfs /dev/sda2```
 
 ## Subvolumes und Mountpunkte
 
@@ -35,15 +35,14 @@ Das Default-Subvolume mounten
 In den Mountpunkt wechseln  
 ```cd /mnt```  
 
-Subvolume für ```/``` erstellen  
+Subvolumes für ```/```, ```home```, ```snapshots``` und ```pkg``` erstellen  
 ```btrfs subvolume create @```  
-Subvolume für ```home``` erstellen  
 ```btrfs subvolume create @home```  
-Subvolume für ```snapshots``` erstellen  
 ```btrfs subvolume create @snapshots```  
+```btrfs subvolume create @pkg```  
 *Optional:*  
 *Subvolume für ```swap``` erstellen*  
-*```sudo btrfs subvolume create @swap```*  
+*```btrfs subvolume create @swap```*  
 
 Subvolumes anzeigen lassen  
 ```btrfs subvolume list -p /mnt```  
@@ -54,16 +53,19 @@ Unmount des Default-Subvolumes 5
 Subvolume ```/``` mounten  
 ```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@ /dev/sda2 /mnt```  
 
-Ordner für die Mountpunkte ```boot```, ```home``` und ```snapshots``` erstellen
+Ordner für die Mountpunkte ```boot```, ```home```, ```snapshots``` und ```pkg``` erstellen  
 ```mkdir -p /mnt/boot```  
-```mkdir -p /mnt/home```
+```mkdir -p /mnt/home```  
 ```mkdir -p /mnt/.snapshots```  
+```mkdir -p /mnt/var/cache/pacman/pkg```  
+
 *Optional:*  
 ```mkdir -p /mnt/.swap```
 
-Subvolumes ```home``` und ```snapshots``` mounten  
+Subvolumes ```home```, ```snapshots``` und ```pkg``` mounten  
 ```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@home /dev/sda2 /mnt/home```  
 ```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@snapshots /dev/sda2 /mnt/.snapshots```  
+```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@pkg /dev/sda2 /mnt/var/cache/pacman/pkg```  
 *Optional:*  
 ```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@swap /dev/sda2 /.swap```  
 
@@ -77,12 +79,15 @@ EFIBOOT mounten
 ```nano /etc/pacman.d/mirrorlist```  
 Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist  
 
-Pacstrap durchführen  
+Pacstrap durchführen (Intel CPU)  
 ```pacstrap /mnt base base-devel linux linux-firmware networkmanager intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr openssh btrfs-progs```  
+
+Pacstrap durchführen (AMD CPU)  
+```pacstrap /mnt base base-devel linux linux-firmware networkmanager amd-ucode zsh alacritty nano vim man tlp acpid dbus avahi grub efibootmgr openssh btrfs-progs```  
 
 ### fstab
 
 Die Optionen werden automatisch vom mount der Subvolumes übernommen  
-```genfstab -Lp /mnt > /etc/fstab```
+```genfstab -Lp /mnt > /mnt/etc/fstab```
 
 Anschließend weiter mit der Installation unter [Systemkonfiguration](https://github.com/ckord/ArchLinux/blob/master/Installation%20Arch%20Linux.md).
