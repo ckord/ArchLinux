@@ -26,7 +26,7 @@ Das Subvolume für swap soll im Default-Subvolume erstellt werden. Dazu die Btrf
 Subvolume für ```swap``` erstellen  
 ```sudo btrfs subvolume create @swap```  
 
-Mountpunkt verlassen und Partition unmounten
+Mountpunkt verlassen und Partition unmounten  
 ```cd ..```  
 ```sudo umount -R /mnt```  
 
@@ -41,7 +41,7 @@ Subvolid abfragen und id notieren
 
 In die fstab übernehmen  
 ```sudo nano /etc/fstab```  
-```LABEL=p_arch /.swap btrfs rw,noatime,space_cache,subvolid=XXX,subvol=/@swap,subvol=@swap 0 0```  
+```LABEL=Btrfs /.swap btrfs rw,noatime,space_cache,subvolid=XXX,subvol=/@swap,subvol=@swap 0 0```  
 (**ACHTUNG!** subvolid=XXX beachten!)
 
 ## Konfiguration
