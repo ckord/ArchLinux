@@ -4,19 +4,19 @@
 
 * [Vorbereitungen](#Vorbereitungen)
 * [Partitionierung](#Partitionierung)  
-    * [EFIBOOT](#EFIBOOT)  
-    * [root](#root)  
+  * [EFIBOOT](#EFIBOOT)  
+  * [root](#root)  
 * [Dateisysteme](#Dateisysteme)  
-    * [EFIBOOT](#EFIBOOT)  
-    * [root](#root)
+  * [EFIBOOT](#EFIBOOT)  
+  * [root](#root)
 * [Installation des Betriebssystems](#Installation-des-Betriebssystems)  
-    * [pacstrap](#pacstrap)  
-    * [fstab](#fstab)  
+  * [pacstrap](#pacstrap)  
+  * [fstab](#fstab)  
 * [Systemkonfiguration](#Systemkonfiguration)
 * [Bootloader](#Bootloader)
 * [Benutzer](#Benutzer)  
-    * [Benutzer](#Benutzer)  
-    * [sudo](#Benutzer-zur-Gruppe-Sudo-hinzufügen)  
+  * [Benutzer](#Benutzer)  
+  * [sudo](#Benutzer-zur-Gruppe-Sudo-hinzufügen)  
 
 ## Vorbereitungen
 
@@ -32,21 +32,21 @@ Ich installiere mit UEFI und möchte ```grub``` als Bootmanager verwenden. Wir b
 
 Partitionierungstool mit ```cfdisk``` starten
 
-### EFIBOOT
+### EFIBOOT Partition
 
 ```EFIBOOT``` wird die erste Partition ```sda1``` am Anfang des Datenträgers ```sda```. Ich setze die Größe auf ```1GB```.
 
-### root
+### root  Partition
 
 ```root``` wird die zweite Partition ```sda2```, direkt nach ```EFIBOOT```. Sie füllt den kompletten Rest des Datenträgers auf.  
 
 ## Dateisysteme
 
-### EFIBOOT
+### EFIBOOT Dateisystem
 
 ```mkfs.fat -F 32 -n EFIBOOT /dev/sda1```
 
-### root
+### root Dateisystem
 
 ```mkfs.ext4 -L p_arch /dev/sda2```
 
@@ -63,8 +63,11 @@ Partitionierungstool mit ```cfdisk``` starten
 ```nano /etc/pacman.d/mirrorlist```  
 Die Zeilen löschen bis ein deutscher Spiegelserver ganz oben ist  
 
-Pacstrap durchführen  
+Pacstrap durchführen (Intel CPU)  
 ```pacstrap /mnt base base-devel linux linux-firmware networkmanager intel-ucode zsh alacritty nano vim man tlp acpid dbus avahi openssh```  
+
+Pacstrap durchführen (AMD CPU)  
+```pacstrap /mnt base base-devel linux linux-firmware networkmanager amd-ucode zsh alacritty nano vim man tlp acpid dbus avahi openssh```  
 
 ### fstab
 
@@ -104,9 +107,11 @@ Kommentarzeichen ```#``` entfernen
 Locale generieren  
 ```locale-gen```  
 
+Zusätzlich LC_ALL setzen  
+```echo LC_ALL="de_DE.UTF-8" >> /etc/environment```
+
 Die Tastaturbelegung und Schriftart festlegen  
 ```echo KEYMAP=de-latin1 > /etc/vconsole.conf```  
-```echo FONT=lat9w-16 >> /etc/vconsole.conf```  
 
 Die Zeitzone festlegen  
 ```ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime```  
@@ -152,5 +157,5 @@ Kommentarzeichen ```#``` vor der Zeile
 ```reboot```
 
 Abschließend mit der Installation der gewünschenten DE/WM [i3](https://github.com/ckord/ArchLinux/blob/master/i3.md) fortfahren.  
-*Optional*
+*Optional*  
 Mit der Konfiguration eines [Swapfiles unter Btrfs](https://github.com/ckord/ArchLinux/blob/master/swapfile_Btrfs.md) fortfahren.
