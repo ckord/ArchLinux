@@ -67,7 +67,7 @@ Subvolumes ```home```, ```snapshots``` und ```pkg``` mounten
 ```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@snapshots /dev/sda2 /mnt/.snapshots```  
 ```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@pkg /dev/sda2 /mnt/var/cache/pacman/pkg```  
 *Optional:*  
-```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@swap /dev/sda2 /.swap```  
+```mount -o rw,noatime,space_cache,compress=lzo,ssd,subvol=@swap /dev/sda2 /mnt/.swap```  
 
 EFIBOOT mounten  
 ```mount /dev/sda1 /mnt/boot```
