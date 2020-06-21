@@ -23,7 +23,7 @@ Das System neu starten. Mit `sudo aa-enabled` kann nach dem Neustart geprüft we
 
 Firejail Integration in AppArmor  
 `su -`  
-`apparmor_parser -r /etc/apparmor.d/firejail-default`
+`apparmor_parser -r /etc/apparmor.d/firejail-default`  
 `exit`
 
 Um jedes Programm, das ein Firejail Profil hat, automatisch mit Firejail starten  
